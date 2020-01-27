@@ -14,9 +14,11 @@ namespace library
       lib.AddBook(book1);
       lib.AddBook(book2);
       lib.AddBook(book3);
+      Console.Clear();
       lib.PrintBooks();
       string selection = Console.ReadLine();
       lib.Checkout(selection);
+      //   lib.PrintBooks();
     }
   }
 }

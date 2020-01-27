@@ -16,7 +16,22 @@ namespace library.Models
     {
       AvailableBooks.Add(book);
     }
-
+    public void Checkout(string selection)
+    {
+      Book selectedBook = ValidateBook(AvailableBooks, selection);
+      if (selectedBook == null)
+      {
+        Console.WriteLine("Invalid Selection");
+        return;
+      }
+      else
+      {
+        selectedBook.Available = false;
+        CheckedOut.Add(selectedBook);
+        AvailableBooks.Remove(selectedBook);
+        Console.WriteLine("Check out successful!");
+      }
+    }
     private Book ValidateBook(List<Book> booklist, string selection)
     {
       int bookIndex = 0;
@@ -32,12 +47,11 @@ namespace library.Models
     }
     public void PrintBooks()
     {
-      Console.Clear();
       Console.WriteLine(" Welcome to the Library!\n");
       Console.WriteLine(" Available Books:");
-      for (int i = 0; i < Books.Count; i++)
+      for (int i = 0; i < AvailableBooks.Count; i++)
       {
-        Console.WriteLine($" {i + 1}.) {Books[i].Title} - {Books[i].Author}");
+        Console.WriteLine($" {i + 1}.) {AvailableBooks[i].Title} - {AvailableBooks[i].Author}");
       }
       Console.WriteLine("\n Select a book number to checkout, (Q)uit, or (R)eturn a book");
     }
